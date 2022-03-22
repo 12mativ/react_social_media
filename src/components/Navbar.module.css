@@ -1,0 +1,35 @@
+.nav {
+    grid-area: n;
+    background-color: #2a2828;
+
+}
+
+.nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.nav ul li {
+    padding-bottom: 10px;
+}
+
+.nav ul li:last-child {
+    padding-bottom: 0;
+    padding-top: 30px;
+}
+
+.nav ul li:hover a {
+    background-color: #3d3939;
+}
+
+.nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 8px;
+    transition: all linear .1s;
+    border-radius: 5px;
+}
