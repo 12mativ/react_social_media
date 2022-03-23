@@ -1,0 +1,40 @@
+.posts_header {
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.post_field {
+    display: flex;
+    flex-direction: column;
+}
+
+.post_field textarea {
+    width: 500px;
+    max-width: 800px;
+    min-width: 400px;
+    min-height: 100px;
+    background-color: #5b5151;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.post_field button {
+    width: 200px;
+    background-color: #5e5757;
+    border: none;
+    padding: 8px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: all linear .1s;
+}
+
+.post_field button:hover {
+    cursor: pointer;
+    background-color: #4d4646;
+}

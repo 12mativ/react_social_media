@@ -1,6 +1,6 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 3fr 10fr;
     grid-gap: 20px ;
 }
 
@@ -9,16 +9,28 @@
 }
 
 .dialog {
-    padding: 5px;
     margin-bottom: 10px;
-    font-size: 18px;
 }
 
 .dialog:last-child {
     margin-bottom: 0;
 }
 
-.dialog.active {
+.dialog a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 7px;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: all linear .1s;
+}
+
+.dialog a:hover {
+    background-color: #5e5757;
+}
+
+.dialog a.active {
     background-color: #5e5757;
 }
 

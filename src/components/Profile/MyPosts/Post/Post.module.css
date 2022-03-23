@@ -24,7 +24,11 @@
 .item img {
     width: 60px;
     height: 60px;
-    padding-right: 40px;
+}
+
+.desc {
+    display: grid;
+    grid-template-columns: 1.5fr 10fr;
 }
 
 .likes {
