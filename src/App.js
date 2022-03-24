@@ -14,7 +14,7 @@ const App = (props) => {
         <BrowserRouter>
             <div className="wrapper">
                 <Header/>
-                <Navbar/>
+                <Navbar state={props.state.sidebar}/>
                 <div className="wrapper-content">
                     <Routes>
                         <Route path='/profile' element={<Profile state={props.state.profilePage}/>}/>

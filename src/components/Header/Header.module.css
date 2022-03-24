@@ -2,6 +2,10 @@
     grid-area: h;
     background-color: #3d3939;
     z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
 
 }
 
@@ -14,6 +18,12 @@
     height: 60px;
     background-color: #3d3939;
     z-index: -1;
+}
+
+.header_container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .header img {

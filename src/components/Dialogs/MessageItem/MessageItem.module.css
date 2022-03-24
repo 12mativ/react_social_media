@@ -1,0 +1,19 @@
+.dialog {
+    margin-bottom: 35px;
+}
+
+.dialog:nth-child(2n) .message {
+    margin-left: auto;
+}
+
+.dialog:last-child {
+    margin-bottom: 0;
+}
+
+.message {
+    max-width: 400px;
+    background-color: #2a2727;
+    padding: 10px;
+    border-radius: 8px;
+}
+

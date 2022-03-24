@@ -1,0 +1,42 @@
+.dialog {
+    margin-bottom: 10px;
+}
+
+.dialog img {
+    width: 50px;
+}
+
+.dialog:last-child {
+    margin-bottom: 0;
+}
+
+.dialog a {
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 7px;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: all linear 0.2s;
+    align-items: center;
+    max-width: 300px;
+    white-space: nowrap;
+}
+
+.dialog a:hover {
+    background-color: #5e5757;
+    cursor: pointer;
+}
+
+.dialog a.active {
+    background-color: #5e5757;
+}
+
+.dialog a img{
+    margin-right: 20px;
+}
+
+.dialog_name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

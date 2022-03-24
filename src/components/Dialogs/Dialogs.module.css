@@ -1,46 +1,11 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 3fr 10fr;
+    grid-template-columns: 4fr 10fr;
     grid-gap: 20px ;
+    height: 100%;
 }
 
-.dialogs_items {
-
-}
-
-.dialog {
-    margin-bottom: 10px;
-}
-
-.dialog:last-child {
-    margin-bottom: 0;
-}
-
-.dialog a {
-    display: block;
-    text-decoration: none;
-    color: #fff;
-    padding: 10px 7px;
-    border-radius: 5px;
-    font-size: 18px;
-    transition: all linear .1s;
-}
-
-.dialog a:hover {
-    background-color: #5e5757;
-}
-
-.dialog a.active {
-    background-color: #5e5757;
-}
-
-.messages {
-
-}
-.message {
-    margin-bottom: 20px;
-}
-
-.message:last-child {
-    margin-bottom: 0;
+.dialogs_elems {
+    padding-right: 10px;
+    border-right: 1px #7a7272 solid;
 }
