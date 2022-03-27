@@ -9,3 +9,38 @@
     padding-right: 10px;
     border-right: 1px #7a7272 solid;
 }
+
+.message_field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.message_field textarea {
+    flex: 0 1 85%;
+    height: 100px;
+    margin-right: 20px;
+    background-color: #5b5151;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    padding: 10px;
+    resize: none;
+}
+
+.message_field button {
+    flex: 0 1 15%;
+    background-color: #5e5757;
+    border: none;
+    padding: 8px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: all linear .1s;
+}
+
+.message_field button:hover {
+    cursor: pointer;
+    background-color: #4d4646;
+}
