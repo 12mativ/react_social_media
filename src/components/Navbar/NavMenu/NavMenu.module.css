@@ -1,0 +1,35 @@
+ul {
+    list-style: none;
+    margin: 0 0 100px 0;
+    padding: 0;
+
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+ul li:last-child {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+ul li:hover a {
+    background-color: #3d3939;
+    cursor: pointer;
+}
+
+ul li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 8px;
+    transition: all linear .1s;
+    border-radius: 5px;
+}
+
+ul li a.active {
+    background-color: #3d3939;
+}
+

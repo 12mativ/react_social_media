@@ -1,0 +1,14 @@
+.selectedPage {
+    font-weight: 700;
+}
+
+.pagination {
+    width: 100px;
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+.pagination span:hover {
+    cursor: pointer;
+}

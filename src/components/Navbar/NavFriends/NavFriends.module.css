@@ -1,0 +1,34 @@
+.friend_header {
+    font-size: 30px;
+}
+
+.friends {
+    display: flex;
+    max-width: 235px;
+    margin-top: 15px;
+    flex-wrap: nowrap;
+}
+
+.friend_ava {
+    flex: 0 1 33%;
+    margin-right: 20px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.friend_ava span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.friend_ava:last-child {
+    margin-right: 0;
+}
+
+.friend_ava img{
+    width: 50px;
+    margin: 0 auto;
+}
