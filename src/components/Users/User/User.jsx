@@ -1,11 +1,15 @@
 import styles from "./User.module.css";
 import userPhoto from '../../../assets/images/01.png'
+import {NavLink} from "react-router-dom";
 
 const User = (props) => {
     return (
         <div className={styles.user}>
             <div className={styles.user_ava}>
-                <img src={props.photoURL.small != null ? props.photoURL.small : userPhoto} alt=""/>
+                <NavLink to={`/profile/${props.userId}`} >
+                    <img src={props.photoURL.small != null ? props.photoURL.small : userPhoto} alt=""/>
+                </NavLink>
+
                 {props.followed
                     ? <button onClick={() => {
                         props.unfollow(props.userId)

@@ -1,25 +1,25 @@
-ul {
+.nav_menu {
     list-style: none;
     margin: 0 0 100px 0;
     padding: 0;
 
 }
 
-ul li {
+.nav_link {
     margin-bottom: 10px;
 }
 
-ul li:last-child {
+.nav_link:last-child {
     margin-bottom: 30px;
     margin-top: 30px;
 }
 
-ul li:hover a {
+.nav_link:hover a {
     background-color: #3d3939;
     cursor: pointer;
 }
 
-ul li a {
+.nav_link a {
     display: block;
     text-decoration: none;
     color: #fff;
@@ -29,7 +29,7 @@ ul li a {
     border-radius: 5px;
 }
 
-ul li a.active {
+.nav_link a.active {
     background-color: #3d3939;
 }
 

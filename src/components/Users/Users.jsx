@@ -3,17 +3,18 @@ import React from "react";
 import User from "./User/User";
 
 const Users = (props) => {
-    let users = props.users.map(user => <User photoURL={user.photos}
-                                                   userId={user.id}
-                                                   followed={user.followed}
-                                                   name={user.name}
-                                                   status={user.status}
-                                                   follow={props.follow}
-                                                   unfollow={props.unfollow}/>)
+    let users = props.users.map(user => <User key={user.id} photoURL={user.photos}
+                                              userId={user.id}
+                                              followed={user.followed}
+                                              name={user.name}
+                                              status={user.status}
+                                              follow={props.follow}
+                                              unfollow={props.unfollow}
+    />)
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
-    for (let i=1; i<=pagesCount; i++) {
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
 
@@ -21,8 +22,10 @@ const Users = (props) => {
         <div>
             <div className={styles.pagination}>
                 {pages.map(page => {
-                    return <span className={props.currentPage === page ? styles.selectedPage : ''}
-                                 onClick={() => { props.onPageChanged(page) }}>{page}</span>
+                    return <span key={page} className={props.currentPage === page ? styles.selectedPage : ''}
+                                 onClick={() => {
+                                     props.onPageChanged(page)
+                                 }}>{page}</span>
                 })}
             </div>
             {users}
