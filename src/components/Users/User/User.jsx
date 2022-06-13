@@ -1,7 +1,6 @@
 import styles from "./User.module.css";
 import userPhoto from '../../../assets/images/01.png'
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
 
 const User = (props) => {
     return (
@@ -12,38 +11,14 @@ const User = (props) => {
                 </NavLink>
 
                 {props.followed
-                    ? <button onClick={() => {
-                        axios.delete('https://social-network.samuraijs.com/api/1.0/follow/' + props.userId,
-                            {
-                                withCredentials: true,
-                                headers:{
-                                    'API-KEY': '50e9bd11-342b-4937-8f6c-bd19753a6e9e'
-                                }
-                            }
-                        )
-                            .then(response => {
-                                if (response.data.resultCode === 0) {
-                                    props.unfollow(props.userId)
-                                }
-                            })
-
+                    ? <button disabled={props.followingInProgress.some(id => id === props.userId)} onClick={() => {
+                        props.unfollow(props.userId)
                     }}>Unfollow</button>
 
-                    : <button onClick={() => {
-                        axios.post('https://social-network.samuraijs.com/api/1.0/follow/' + props.userId, {},
-                            {
-                                withCredentials: true,
-                                headers: {
-                                    'API-KEY': '50e9bd11-342b-4937-8f6c-bd19753a6e9e'
-                                }
-                            })
-                            .then(response => {
-                                if (response.data.resultCode === 0) {
-                                    props.follow(props.userId)
-                                }
-                            })
-
+                    : <button disabled={props.followingInProgress.some(id => id === props.userId)} onClick={() => {
+                        props.follow(props.userId);
                     }}>Follow</button>}
+
             </div>
             <div className={styles.user_info}>
                 <div className={styles.user_description}>
