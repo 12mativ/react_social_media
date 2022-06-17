@@ -1,5 +1,6 @@
 import classes from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus"
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -19,11 +20,12 @@ const ProfileInfo = (props) => {
 
     return (
         <div className={classes.content}>
-            <img className={classes.head_img}
-                 src="https://user-images.githubusercontent.com/88069082/149673405-b47f71c1-0777-4038-9247-5b0c9d166f22.jpg"
-                 alt=""/>
+            {/*<img className={classes.head_img}*/}
+            {/*     src="https://user-images.githubusercontent.com/88069082/149673405-b47f71c1-0777-4038-9247-5b0c9d166f22.jpg"*/}
+            {/*     alt=""/>*/}
             <div className={classes.description}>
                 <img src={props.profile.photos.large === null ? null : props.profile.photos.large} alt=''/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <h1>About me</h1>
                 <p>{props.profile.aboutMe}</p>
                 <h2>Contacts</h2>
