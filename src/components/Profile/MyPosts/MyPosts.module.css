@@ -16,6 +16,7 @@
     min-height: 100px;
     background-color: #5b5151;
     border: none;
+    border-radius: 5px;
     color: #fff;
     font-size: 18px;
     outline: none;
@@ -37,4 +38,8 @@
 .post_field button:hover {
     cursor: pointer;
     background-color: #4d4646;
+}
+
+.submit_btn:disabled {
+    cursor: not-allowed;
 }

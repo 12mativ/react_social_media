@@ -34,6 +34,22 @@
 }
 
 .login_btn {
+    background-color: #5e5757;
+    border: none;
+    padding: 5px 8px;
+    margin-left: 20px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: all linear .1s;
+}
+
+.login_btn:hover {
+    cursor: pointer;
+    background-color: #4d4646;
+}
+
+.login_name {
     text-transform: uppercase;
     text-decoration: none;
     color: #fff;

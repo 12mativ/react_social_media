@@ -11,3 +11,13 @@
    height: 400px;
    margin-bottom: 20px;
 }
+
+.status_input {
+   background-color: #5b5151;
+   border: none;
+   border-radius: 5px;
+   color: #fff;
+   font-size: 18px;
+   outline: none;
+   padding: 10px;
+}
