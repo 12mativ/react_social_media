@@ -79,3 +79,9 @@
     cursor: pointer;
     background-color: #5b5151;
 }
+
+.form_error {
+    color: red;
+    font-size: 20px;
+    margin: 20px 0;
+}

@@ -19,7 +19,8 @@ const rememberMeOption = [
 
 const Login = (props) => {
     const onSubmit = (values, action) => {
-        props.login(values.email, values.password, values.rememberMe[0])
+        props.login(values.email, values.password, values.rememberMe[0], action.setStatus)
+        action.setSubmitting(false)
         action.resetForm()
         console.log(values)
 
@@ -41,6 +42,9 @@ const Login = (props) => {
                     formik => {
                         return (
                             <Form className={classes.form}>
+                                <div className={classes.form_error}>
+                                    {formik.status}
+                                </div>
                                 <div className={classes.form_field}>
                                     <FormikControl
                                         control='input'
