@@ -1,8 +1,8 @@
-import styles from "./Users.module.css";
 import React from "react";
 import User from "./User/User";
+import Paginator from "../common/Paginator/Paginator";
 
-const Users = (props) => {
+const Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, ...props}) => {
     let users = props.users.map(user => <User key={user.id} photoURL={user.photos}
                                               userId={user.id}
                                               followed={user.followed}
@@ -14,25 +14,16 @@ const Users = (props) => {
 
     />)
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
     return (
         <div>
-            <div className={styles.pagination}>
-                {pages.map(page => {
-                    return <span key={page} className={props.currentPage === page ? styles.selectedPage : ''}
-                                 onClick={() => {
-                                     props.onPageChanged(page)
-                                 }}>{page}</span>
-                })}
-            </div>
+            <Paginator
+                currentPage={currentPage}
+                onPageChanged={onPageChanged}
+                totalItemsCount={totalUsersCount}
+                pageSize={pageSize}
+            />
             {users}
         </div>
-
     )
 }
 

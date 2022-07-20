@@ -1,18 +1,18 @@
 import classes from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus"
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = (props) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatus}) => {
+    if (!profile) {
         return <Preloader/>
     }
 
     let contacts = [];
     let i = 1
-        for (let contact in props.profile.contacts) {
-            if (props.profile.contacts[contact]) {
+        for (let contact in profile.contacts) {
+            if (profile.contacts[contact]) {
                 contacts.push(
-                    <li key={i}>{contact} - {props.profile.contacts[contact]}</li>
+                    <li key={i}>{contact} - {profile.contacts[contact]}</li>
                 )
                 i++
             }
@@ -20,14 +20,11 @@ const ProfileInfo = (props) => {
 
     return (
         <div className={classes.content}>
-            {/*<img className={classes.head_img}*/}
-            {/*     src="https://user-images.githubusercontent.com/88069082/149673405-b47f71c1-0777-4038-9247-5b0c9d166f22.jpg"*/}
-            {/*     alt=""/>*/}
             <div className={classes.description}>
-                <img src={props.profile.photos.large === null ? null : props.profile.photos.large} alt=''/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <img src={profile.photos.large === null ? null : profile.photos.large} alt=''/>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                 <h1>About me</h1>
-                <p>{props.profile.aboutMe}</p>
+                <p>{profile.aboutMe}</p>
                 <h2>Contacts</h2>
                 <ul>
                     {contacts}

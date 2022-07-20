@@ -1,0 +1,30 @@
+.userPage {
+    margin: 0 5px;
+    padding: 2px 7px;
+    background-color: grey;
+}
+
+.selectedPage {
+    font-weight: 700;
+    background-color: #484747;
+}
+
+.pagination {
+    margin-bottom: 30px;
+}
+
+.pagination span:hover {
+    cursor: pointer;
+}
+
+.user_btn {
+    padding: 5px 8px;
+}
+
+.user_btn_left {
+    margin-right: 10px;
+}
+
+.user_btn_right {
+    margin-left: 10px;
+}

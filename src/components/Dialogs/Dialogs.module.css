@@ -29,20 +29,9 @@
     resize: none;
 }
 
-.message_field button {
+.message_btn {
     flex: 0 1 15%;
-    background-color: #5e5757;
-    border: none;
     padding: 8px;
-    color: #fff;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: all linear .1s;
-}
-
-.message_field button:hover {
-    cursor: pointer;
-    background-color: #4d4646;
 }
 
 .message_field_form {

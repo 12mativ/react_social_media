@@ -1,6 +1,6 @@
 import {authAPI} from "../api/api";
 
-const SET_USER_DATA = 'SET-USER-DATA'
+const SET_USER_DATA = 'project2/auth/SET-USER-DATA'
 
 let initialState = {
     userId: null,
@@ -26,40 +26,41 @@ const authReducer = (state = initialState, action) => {
 }
 
 //ACTION CREATOR
-export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA,
-    payload: {userId, email, login, isAuth}})
+export const setAuthUserData = (userId, email, login, isAuth) => ({
+    type: SET_USER_DATA,
+    payload: {userId, email, login, isAuth}
+})
 
 //THUNK
 export const getAuthUserData = () => {
-    return (dispatch) => {
-        return authAPI.me().then(data => {
-            if (data.resultCode === 0) {
-                let {id, email, login} = data.data;
-                dispatch(setAuthUserData(id, email, login, true));
-            }
-        })
+    return async (dispatch) => {
+        let data = await authAPI.me()
+        if (data.resultCode === 0) {
+            let {id, email, login} = data.data;
+            dispatch(setAuthUserData(id, email, login, true));
+        }
     }
 }
 
 export const login = (email, password, rememberMe, setStatus) => {
-    return (dispatch) => {
-        authAPI.login(email, password, rememberMe).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(getAuthUserData())
-            } else {
-                setStatus(data.messages)
-            }
-        })
+    return async (dispatch) => {
+        let data = await authAPI.login(email, password, rememberMe)
+
+        if (data.resultCode === 0) {
+            dispatch(getAuthUserData())
+        } else {
+            setStatus(data.messages)
+        }
     }
 }
 
 export const logout = () => {
-    return (dispatch) => {
-        authAPI.logout().then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false));
-            }
-        })
+    return async (dispatch) => {
+        let data = await authAPI.logout()
+
+        if (data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false));
+        }
     }
 }
 

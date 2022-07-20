@@ -17,16 +17,16 @@ const rememberMeOption = [
     {key: 'Remember me', value: 'true'}
 ]
 
-const Login = (props) => {
+const Login = ({login, isAuth}) => {
     const onSubmit = (values, action) => {
-        props.login(values.email, values.password, values.rememberMe[0], action.setStatus)
+        login(values.email, values.password, values.rememberMe[0], action.setStatus)
         action.setSubmitting(false)
         action.resetForm()
         console.log(values)
 
     }
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Navigate to={'/profile'}/>
     }
 
@@ -85,34 +85,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {login})(Login)
-
-
-// <div>
-// <label htmlFor="email">Email</label>
-// <Field
-//     type="text"
-//     id="email"
-//     name="email"
-// />
-// <ErrorMessage name='email' />
-// </div>
-//
-// <div>
-//     <label htmlFor="password">Password</label>
-//     <Field
-//         type="text"
-//         id="password"
-//         name="password"
-//     />
-//     <ErrorMessage name='password' />
-// </div>
-//
-// <div>
-//     <Field
-//         type="checkbox"
-//         id="rememberMe"
-//         name="rememberMe"
-//     />
-//     <label htmlFor="rememberMe">Remember me</label>
-// </div>
-// <button type="submit">Submit</button>

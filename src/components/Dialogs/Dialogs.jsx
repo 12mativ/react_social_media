@@ -31,16 +31,6 @@ const initialValues = {
     message: ''
 }
 
-
-// const onSubmit = (values, actions) => {
-//     actions.resetForm()
-//     console.log(values)
-// }
-
-// написал onSubmit внутри самой компоненты формы, пока не знаю, будет ли это проблемой
-// если будет, то просто вынеси onSubmit за компоненту
-// а к кнопке добавь onClick={()=>{setMessage(formik.values.message)}}
-
 const MessageForm = (props) => {
     const onSubmit = (values, actions) => {
         actions.resetForm()
@@ -64,21 +54,13 @@ const MessageForm = (props) => {
                                 noError={true}
                                 placeholder='Start typing'
                             />
-                            <button type='submit' disabled={!formik.isValid}>Send</button>
-
-
-                            {/*<div className={classes.message_field_form}>*/}
-                            {/*    <Field*/}
-                            {/*        as='textarea'*/}
-                            {/*        type="text"*/}
-                            {/*        id="message"*/}
-                            {/*        name="message"*/}
-                            {/*        placeholder="Start typing"*/}
-                            {/*    />*/}
-
-                            {/*    <button type='submit'>Send</button>*/}
-                            {/*</div>*/}
-
+                            <button
+                                type='submit'
+                                disabled={!formik.isValid}
+                                className={`${classes.message_btn} btn`}
+                            >
+                                Send
+                            </button>
                         </Form>
                     )
                 }
