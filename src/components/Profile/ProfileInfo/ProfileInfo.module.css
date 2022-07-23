@@ -2,14 +2,29 @@
    font-size: 17px;
 }
 
-.description h1 {
-   margin: 20px 0 10px 0;
-}
-
 .head_img {
    width: 100%;
    height: 400px;
    margin-bottom: 20px;
+}
+
+.main_description {
+   display: flex;
+   align-items: flex-start;
+   justify-content: space-between;
+}
+
+.main_description_pers {
+   display: flex;
+   overflow-x: hidden
+}
+
+.status_wrapper {
+   margin: 20px 0;
+}
+
+.status {
+   padding: 10px 150px 10px 0;
 }
 
 .status_input {
@@ -20,4 +35,104 @@
    font-size: 18px;
    outline: none;
    padding: 10px;
+   margin: 30px 0;
+}
+
+.profile_photo {
+   width: 200px;
+   height: 200px;
+   margin-right: 30px;
+}
+
+input[type="file"] {
+   display: none;
+}
+
+.photo_choose {
+   margin-top: 20px;
+   background-color: #5e5757;
+   border-radius: 5px;
+   display: inline-block;
+   padding: 6px 12px;
+   transition: 0.1s all linear;
+}
+
+.photo_choose:hover {
+   background-color: #4d4646;
+   cursor: pointer;
+}
+
+.description_block {
+   margin-bottom: 30px;
+}
+
+.description_block:last-child {
+   margin-bottom: 0;
+}
+
+.contacts_block {
+   margin-bottom: 20px;
+}
+
+.contacts_block:nth-child(2) {
+   margin-top: 20px;
+}
+
+.contacts_block:last-child {
+   margin-bottom: 0;
+}
+
+.contact_name:first-letter {
+   text-transform: uppercase;
+}
+
+.form_error {
+   color: red;
+}
+
+.edit_form input {
+   width: 30%;
+   background-color: #5b5151;
+   border: none;
+   border-radius: 5px;
+   color: #fff;
+   font-size: 18px;
+   outline: none;
+   padding: 10px;
+   resize: none;
+   margin-top: 10px;
+}
+
+.edit_form textarea {
+   width: 20em;
+   max-width: 40em;
+   min-width: 15em;
+   min-height: 5em;
+   max-height: 20em;
+   background-color: #5b5151;
+   border: none;
+   border-radius: 5px;
+   color: #fff;
+   font-size: 18px;
+   outline: none;
+   margin-top: 20px;
+   padding: 10px;
+}
+
+.edit_form input[type='checkbox'] {
+   width: auto;
+}
+
+.edit_btn {
+   padding: 5px 8px;
+}
+
+.save_changes_btn {
+   padding: 5px 8px;
+   margin: 20px 0;
+   background-color: #12490f;
+}
+
+.save_changes_btn:hover {
+   background-color: #1f8019;
 }

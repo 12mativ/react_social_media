@@ -1,7 +1,7 @@
 import './App.css';
 import React from "react";
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -21,32 +21,40 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 
-
 class App extends React.Component {
+    catchAllUnhandledErrors = (promiseRejectionEvent) => {
+        alert('Some error occured!')
+    }
+
     componentDidMount() {
-        this.props.initializeApp()
+        this.props.initializeApp();
+        window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
 
     render() {
-
         if (!this.props.initialized) {
-            return <Preloader />
+            return <Preloader/>
         }
 
         return (
             <div className="wrapper">
                 <HeaderContainer/>
-                <Navbar />
+                <Navbar/>
                 <div className="wrapper-content">
                     <React.Suspense fallback={<Preloader />}>
-                        <Routes>
-                                <Route path='/profile/' element={<ProfileContainer />}/>
+                            <Routes>
+                                <Route path="/" element={<Navigate to="/profile" />} />
+                                <Route path='/profile/' element={<ProfileContainer/>}/>
 
-                                <Route path='/profile/:profileId' element={<ProfileContainer />}/>
+                                <Route path='/profile/:profileId' element={<ProfileContainer/>}/>
 
-                                <Route path='/dialogs/*' element={<DialogsContainer />}/>
+                                <Route path='/dialogs/*' element={<DialogsContainer/>}/>
 
-                                <Route path='/users/*' element={<UsersContainer />}/>
+                                <Route path='/users/*' element={<UsersContainer/>}/>
 
                                 <Route path='/login' element={<Login/>}/>
 
@@ -54,7 +62,8 @@ class App extends React.Component {
                                 <Route path='/music' element={<Music/>}/>
                                 <Route path='/settings' element={<Settings/>}/>
 
-                        </Routes>
+                                <Route path='*' element={<div>404 NOT FOUND</div>}/>
+                            </Routes>
                     </React.Suspense>
                 </div>
             </div>
@@ -72,14 +81,16 @@ const AppContainer = compose(
     connect(mapStateToProps, {initializeApp}))(App)
 
 export const GeneralApp = () => {
-    return <React.StrictMode>
-        <BrowserRouter>
+    return (
+        <React.StrictMode>
+            <BrowserRouter >
 
-            <Provider store={store}>
-                <AppContainer/>
-            </Provider>
+                <Provider store={store}>
+                    <AppContainer/>
+                </Provider>
 
-        </BrowserRouter>
-    </React.StrictMode>
+            </BrowserRouter>
+        </React.StrictMode>
+    )
 
 }

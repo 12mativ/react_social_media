@@ -38,8 +38,15 @@
     margin-left: 20px;
 }
 
+.red_btn {
+    background-color: #a61f1f;
+}
+
+.red_btn:hover {
+    background-color: #b72121;
+}
+
 .login_name {
-    text-transform: uppercase;
     text-decoration: none;
     color: #fff;
 }

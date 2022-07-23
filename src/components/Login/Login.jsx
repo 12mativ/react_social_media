@@ -17,13 +17,11 @@ const rememberMeOption = [
     {key: 'Remember me', value: 'true'}
 ]
 
-const Login = ({login, isAuth}) => {
+const Login = ({login, isAuth, captchaURL}) => {
     const onSubmit = (values, action) => {
-        login(values.email, values.password, values.rememberMe[0], action.setStatus)
+        login(values.email, values.password, values.rememberMe[0], action.setStatus, values.captcha)
         action.setSubmitting(false)
         action.resetForm()
-        console.log(values)
-
     }
 
     if (isAuth) {
@@ -69,19 +67,30 @@ const Login = ({login, isAuth}) => {
                                     />
                                 </div>
 
-                                <button type="submit" disabled={!formik.isValid}>Submit</button>
+                                {captchaURL && <img src={captchaURL}/>}
+                                {captchaURL &&
+                                        <FormikControl
+                                        control='input'
+                                        name='captcha'
+                                    />
+                                }
+
+                                <button type="submit" disabled={!formik.isValid}>Log in</button>
                             </Form>
                         )
                     }
                 }
-
             </Formik>
         </div>
     )
 };
 
 const mapStateToProps = state => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaURL: state.auth.captchaURL
 })
 
 export default connect(mapStateToProps, {login})(Login)
+
+
+//TODO null captcha

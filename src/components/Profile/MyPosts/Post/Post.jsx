@@ -2,7 +2,6 @@ import classes from './Post.module.css';
 
 const Post = (props) => {
     return (
-
         <div className={classes.item}>
             <div className={classes.desc}>
                 <img src="https://cdn-icons-png.flaticon.com/512/147/147142.png" alt=""/>

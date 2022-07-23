@@ -2,12 +2,12 @@
   "name": "react-2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hospitalc.github.io/react_social_media/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
+    "clsx": "^1.2.1",
     "formik": "^2.2.9",
     "react": "^17.0.2",
     "react-datepicker": "^4.8.0",
