@@ -11,9 +11,10 @@ import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import withRouter from "./help_func/withRouter";
-import {initializeApp} from "./redux/app-reducer";
+
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
+import {initializeApp} from "./redux/app/app-reducer";
 
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 // import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -48,13 +49,14 @@ class App extends React.Component {
                     <React.Suspense fallback={<Preloader />}>
                             <Routes>
                                 <Route path="/" element={<Navigate to="/profile" />} />
+
                                 <Route path='/profile/' element={<ProfileContainer/>}/>
 
                                 <Route path='/profile/:profileId' element={<ProfileContainer/>}/>
 
                                 <Route path='/dialogs/*' element={<DialogsContainer/>}/>
 
-                                <Route path='/users/*' element={<UsersContainer/>}/>
+                                <Route path='/users/*' element={<UsersContainer pageTitle='Users'/>}/>
 
                                 <Route path='/login' element={<Login/>}/>
 
@@ -83,7 +85,7 @@ const AppContainer = compose(
 export const GeneralApp = () => {
     return (
         <React.StrictMode>
-            <BrowserRouter >
+            <BrowserRouter>
 
                 <Provider store={store}>
                     <AppContainer/>
