@@ -19,11 +19,15 @@ type MapDispatchProps = {
     getUserProfile: (profileId: number) => void
     getStatus: (profileId: number) => void
     updateStatus: (status: string) => void
-    savePhoto: (file: any) => void
+    savePhoto: (file: File) => void
     saveProfile: (profile: ProfileType, setStatus: any) => void
 }
 
-type ProfileContainerProps = MapStateProps & MapDispatchProps
+type OwnProps = {
+    router: any
+}
+
+type ProfileContainerProps = MapStateProps & MapDispatchProps & OwnProps
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
     refreshProfile() {
@@ -40,7 +44,7 @@ class ProfileContainer extends React.Component<ProfileContainerProps> {
         this.refreshProfile();
     }
 
-    componentDidUpdate(prevProps: MapStateProps) {
+    componentDidUpdate(prevProps: MapStateProps & OwnProps) {
         if (this.props.router.params.profileId !== prevProps.router.params.profileId)
             this.refreshProfile();
     }
@@ -66,8 +70,9 @@ let mapStateToProps = (state: AppStateType): MapStateProps => ({
     isAuth: state.auth.isAuth
 })
 
-export default compose(
-    connect<MapStateProps, MapDispatchProps, null, AppStateType>(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
+export default compose<React.ComponentType>(
     withRouter,
+    connect<MapStateProps, MapDispatchProps, OwnProps, AppStateType>
+    (mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     withAuthRedirect,
 )(ProfileContainer)

@@ -5,11 +5,10 @@ import {Form, Formik, FormikHelpers} from "formik";
 import {FormikControl} from "../../Forms/FormikControl";
 import postFormSchema from "../../FormValidation/PostFormSchema";
 import {PostsType} from "../../../types/types";
-import {AddPostActionType} from "../../../redux/profile/profile-reducer";
 
 type MyPostsType = {
     posts: Array<PostsType>
-    addPost: (text: string) => AddPostActionType
+    addPost: (text: string) => void
 }
 
 const MyPosts: React.FC<MyPostsType> = ({posts, addPost}) => {

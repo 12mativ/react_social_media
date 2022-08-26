@@ -7,15 +7,25 @@ import {useState} from "react";
 import {ProfileDataForm} from "./ProfileFormData";
 import { clsx } from 'clsx';
 import MyPostsContainer from "../MyPosts/MyPostsContainer";
+import {ProfileType} from "../../../types/types";
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
+type ProfileInfoProps = {
+    profile: ProfileType | null
+    status: string | null
+    isOwner: boolean
+    updateStatus: (status: string) => void
+    savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType, setStatus: any) => void
+}
+
+const ProfileInfo: React.FC<ProfileInfoProps> = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
     let [editMode, setEditMode] = useState(false)
 
     if (!profile) {
         return <Preloader/>
     }
 
-    const onProfilePhotoSelected = (e) => {
+    const onProfilePhotoSelected = (e: any) => {
         if (e.target.files.length) {
             savePhoto(e.target.files[0])
         }
