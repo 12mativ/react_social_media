@@ -5,12 +5,8 @@ import {FormikControl} from "../../Forms/FormikControl";
 import {clsx} from "clsx";
 import {ProfileType} from "../../../types/types";
 
-interface AboutMeProfileType extends ProfileType {
-    aboutMe: string | null
-}
-
 type ProfileDataFormType = {
-    profile: AboutMeProfileType
+    profile: ProfileType
     saveProfile: any
     deactivateEditMode: () => void
 }

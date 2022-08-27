@@ -21,6 +21,8 @@ export interface ProfileType {
     lookingForAJobDescription: string
     fullName: string
     contacts: ContactsType
+    photos: PhotosType
+    aboutMe: string
 }
 
 export type PhotosType = {

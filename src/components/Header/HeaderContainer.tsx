@@ -30,5 +30,5 @@ const mapStateToProps = (state: AppStateType) => ({
 })
 
 export default compose(
-    connect<MapStateProps, MapDispatchProps, null, AppStateType>(mapStateToProps, {logout})
+    connect<MapStateProps, MapDispatchProps, {}, AppStateType>(mapStateToProps, {logout})
 )(HeaderContainer);

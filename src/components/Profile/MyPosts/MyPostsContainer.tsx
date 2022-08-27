@@ -19,6 +19,6 @@ const mapStateToProps = (state: AppStateType): MapStateProps => {
 }
 
 const MyPostsContainer = connect<MapStateProps, MapDispatchProps,
-    null, AppStateType>(mapStateToProps, {addPost: actions.addPost})(MyPosts)
+    {}, AppStateType>(mapStateToProps, {addPost: actions.addPost})(MyPosts)
 
 export default MyPostsContainer;

@@ -18,9 +18,9 @@ type WithAuthRedirectProps = {
 }
 
 export function withAuthRedirect<WCP extends WithAuthRedirectProps>(WrappedComponent: React.ComponentType<WCP>) {
-    const RedirectComponent: React.FC<WCP> = (props) => {
-        const {isAuth, ...restProps} = props
-        if (!isAuth && !props.router.params.profileId) return <Navigate to={'/login'}/>;
+    const RedirectComponent: React.FC<WithAuthRedirectProps> = (props) => {
+        const {isAuth, router, ...restProps} = props
+        if (!isAuth && !router.params.profileId) return <Navigate to={'/login'}/>;
 
         return <WrappedComponent {...restProps as WCP}/>
     }

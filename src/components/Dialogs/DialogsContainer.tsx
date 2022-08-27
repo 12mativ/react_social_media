@@ -32,6 +32,6 @@ const mapDispatchToProps = (dispatch: any): MapDispatchProps => {
 type DialogsContainerProps = MapStateProps & MapDispatchProps
 
 export default compose<DialogsContainerProps>(
-    connect<MapStateProps, MapDispatchProps, null, AppStateType>(mapStateToProps, mapDispatchToProps),
+    connect<MapStateProps, MapDispatchProps, {}, AppStateType>(mapStateToProps, mapDispatchToProps),
     withAuthRedirect,
 )(Dialogs);

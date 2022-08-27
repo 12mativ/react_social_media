@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import classes from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
@@ -7,7 +7,7 @@ import {useState} from "react";
 import {ProfileDataForm} from "./ProfileFormData";
 import { clsx } from 'clsx';
 import MyPostsContainer from "../MyPosts/MyPostsContainer";
-import {ProfileType} from "../../../types/types";
+import {ContactsType, ProfileType} from "../../../types/types";
 
 type ProfileInfoProps = {
     profile: ProfileType | null
@@ -18,15 +18,16 @@ type ProfileInfoProps = {
     saveProfile: (profile: ProfileType, setStatus: any) => void
 }
 
-const ProfileInfo: React.FC<ProfileInfoProps> = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
+const ProfileInfo: React.FC<ProfileInfoProps> =
+    ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
     let [editMode, setEditMode] = useState(false)
 
     if (!profile) {
         return <Preloader/>
     }
 
-    const onProfilePhotoSelected = (e: any) => {
-        if (e.target.files.length) {
+    const onProfilePhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.length) {
             savePhoto(e.target.files[0])
         }
     }
@@ -64,8 +65,6 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({profile, status, updateStatus,
                             status={status}
                             updateStatus={updateStatus}
                             isOwner={isOwner}
-                            onProfilePhotoSelected={onProfilePhotoSelected}
-                            activateEditMode={() => setEditMode(true)}
                         />
                         <MyPostsContainer />
                     </>
@@ -75,10 +74,18 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({profile, status, updateStatus,
     );
 }
 
-const ProfileData = ({profile, status, updateStatus, isOwner}) => {
+type ProfileDataProps = {
+    profile: ProfileType
+    status: string | null
+    updateStatus: (status: string) => void
+    isOwner: boolean
+}
+
+const ProfileData: React.FC<ProfileDataProps> = ({profile, status, updateStatus, isOwner}) => {
     return (
         <div>
-            <ProfileStatusWithHooks status={status} updateStatus={updateStatus} isOwner={isOwner}/>
+            <ProfileStatusWithHooks status={
+                status} updateStatus={updateStatus} isOwner={isOwner}/>
 
             {profile.aboutMe &&
                 <div className={classes.description_block}>
@@ -100,15 +107,26 @@ const ProfileData = ({profile, status, updateStatus, isOwner}) => {
 
             <div className={classes.description_block}>
                 <h2>Contacts</h2>
-                {Object.keys(profile.contacts).map(key => {
-                    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+                {Object
+                    .keys(profile.contacts)
+                    .map(key => {
+                    return <Contact
+                        key={key}
+                        contactTitle={key}
+                        contactValue={profile.contacts[key as keyof ContactsType]}
+                    />
                 })}
             </div>
         </div>
     )
 }
 
-const Contact = ({contactTitle, contactValue}) => {
+type ContactProps = {
+    contactTitle: string
+    contactValue: string | null
+}
+
+const Contact: React.FC<ContactProps> = ({contactTitle, contactValue}) => {
     return (
         <div>
             <b>{contactTitle}</b>: {contactValue}
