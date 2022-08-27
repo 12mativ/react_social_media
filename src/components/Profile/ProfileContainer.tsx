@@ -31,13 +31,16 @@ type ProfileContainerProps = MapStateProps & MapDispatchProps & OwnProps
 
 class ProfileContainer extends React.Component<ProfileContainerProps> {
     refreshProfile() {
-        let profileId = this.props.router.params.profileId;
+        let profileId: number | null = +this.props.router.params.profileId;
         if (!profileId) {
             profileId = this.props.userId;
         }
-
-        this.props.getUserProfile(profileId);
-        this.props.getStatus(profileId);
+        if (!profileId) {
+            console.error('ID should exist in URI params or in state ')
+        } else {
+            this.props.getUserProfile(profileId);
+            this.props.getStatus(profileId);
+        }
     }
 
     componentDidMount() {

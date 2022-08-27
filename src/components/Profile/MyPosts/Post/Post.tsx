@@ -1,15 +1,21 @@
 import classes from './Post.module.css';
+import React from "react";
 
-const Post = (props) => {
+type PostProps = {
+    message: string
+    likesCount: number
+}
+
+const Post: React.FC<PostProps> = ({message, likesCount}) => {
     return (
         <div className={classes.item}>
             <div className={classes.desc}>
                 <img src="https://cdn-icons-png.flaticon.com/512/147/147142.png" alt=""/>
-                <span>{props.message}</span>
+                <span>{message}</span>
             </div>
 
             <div className={classes.likes}>
-                <span>{props.likesCount} Likes</span>
+                <span>{likesCount} Likes</span>
             </div>
         </div>
 
