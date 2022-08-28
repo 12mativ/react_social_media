@@ -5,7 +5,7 @@ import React from "react";
 
 type ProfileProps = {
     profile: ProfileType | null
-    status: string | null
+    status: string
     isOwner: boolean
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void

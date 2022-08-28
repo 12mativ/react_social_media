@@ -47,7 +47,7 @@ const ProfileStatusWithHooks: React.FC<ProfileStatusWithHooksProps> = (props) =>
                     <input
                         className={classes.status_input}
                         autoFocus={true}
-                        value={status}
+                        value={status ? status : ''}
                         onChange={onStatusChange}
                         onBlur={deactivateEditMode}
                         placeholder='Your status'

@@ -11,7 +11,7 @@ import {ContactsType, ProfileType} from "../../../types/types";
 
 type ProfileInfoProps = {
     profile: ProfileType | null
-    status: string | null
+    status: string
     isOwner: boolean
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
@@ -76,7 +76,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> =
 
 type ProfileDataProps = {
     profile: ProfileType
-    status: string | null
+    status: string
     updateStatus: (status: string) => void
     isOwner: boolean
 }

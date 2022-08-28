@@ -10,7 +10,7 @@ import {ProfileType} from "../../types/types";
 
 type MapStateProps = {
     profile: ProfileType | null
-    status: string | null
+    status: string
     userId: number | null
     isAuth: boolean
 }
