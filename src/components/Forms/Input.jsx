@@ -5,7 +5,7 @@ import PasswordShowHide from "./PasswordShowHide";
 
 
 export const Input = (props) => {
-    const {label, name, passhide, ...rest} = props
+    const {label, name, noError, passhide, ...rest} = props
     
     return (
         <>
@@ -17,7 +17,7 @@ export const Input = (props) => {
                 autoComplete="on" 
                 component={passhide ? PasswordShowHide : null}
             />
-            <ErrorMessage name={name} component={TextError} />
+            {noError ?  null : <ErrorMessage name={name} component={TextError}/>}
         </>
     )
 }

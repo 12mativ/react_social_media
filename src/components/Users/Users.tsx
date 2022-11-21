@@ -2,6 +2,7 @@ import React from "react";
 import User from "./User/User";
 import Paginator from "../common/Paginator/Paginator";
 import {UsersType} from "../../types/types";
+import {UsersSearch} from "./UsersSearch";
 
 export interface UsersProps {
     currentPage: number
@@ -28,6 +29,7 @@ const Users: React.FC<UsersProps> = ({currentPage, totalUsersCount, pageSize, on
 
     return (
         <div>
+            <UsersSearch />
             <Paginator
                 currentPage={currentPage}
                 onPageChanged={onPageChanged}

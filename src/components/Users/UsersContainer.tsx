@@ -33,6 +33,7 @@ type MapDispatchProps = {
     unfollow: (userId: number) => void
 }
 
+// just to test own props
 type OwnProps = {
     pageTitle: string
 }
@@ -82,6 +83,7 @@ const mapStateToProps = (state: AppStateType): MapStateProps => {
     }
 }
 
+//for throw this to UsersContainer clearly n easy
 const setCurrentPage = actions.setCurrentPage
 
 export default compose(connect<MapStateProps, MapDispatchProps, OwnProps, AppStateType>(mapStateToProps, {
