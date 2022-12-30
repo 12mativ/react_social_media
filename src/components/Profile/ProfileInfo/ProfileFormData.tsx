@@ -31,11 +31,11 @@ export const ProfileDataForm: React.FC<ProfileDataFormType> = ({profile, savePro
         }
     }
 
-    const onSubmit = (values: InitialValuesType, action: FormikHelpers<InitialValuesType>) => {
-        saveProfile(values, action.setStatus).then(() => {
-            deactivateEditMode()
-            action.setSubmitting(false)
-        })
+    const onSubmit = async (values: InitialValuesType, action: FormikHelpers<InitialValuesType>) => {
+        await saveProfile(values, action.setStatus)
+        deactivateEditMode()
+        action.setSubmitting(false)
+
         action.setSubmitting(false)
     }
 

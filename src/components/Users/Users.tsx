@@ -1,35 +1,96 @@
-import React from "react";
+import React, {useEffect} from "react";
 import User from "./User/User";
 import Paginator from "../common/Paginator/Paginator";
-import {UsersType} from "../../types/types";
 import {UsersSearch} from "./UsersSearch";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers,
+    getUsersFilter
+} from "../../redux/users/users-selectors";
+import {actions, follow, requestUsers, unfollow} from "../../redux/users/users-reducer";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 
-export interface UsersProps {
-    currentPage: number
-    totalUsersCount: number
-    pageSize: number
-    users: Array<UsersType>
-    onPageChanged: (page: number) => void
-    followingInProgress: Array<number>
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-}
+export const Users = () => {
+    const users = useSelector(getUsers)
+    const totalUsersCount = useSelector(getTotalUsersCount)
+    const currentPage = useSelector(getCurrentPage)
+    const pageSize = useSelector(getPageSize)
+    const followingInProgress = useSelector(getFollowingInProgress)
+    const filter = useSelector(getUsersFilter)
 
-const Users: React.FC<UsersProps> = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}) => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const [searchParams] = useSearchParams(location.search)
+    const parsed = Object.fromEntries(searchParams)
+
+    useEffect(() => {
+        let actualPage = currentPage
+        let actualFilter = filter
+        if (!!parsed.page) {
+            actualPage = Number(parsed.page)
+        }
+
+        if (!!parsed.term) {
+            actualFilter = {...actualFilter, term: parsed.term}
+        }
+
+        if (!!parsed.friend) {
+            actualFilter = {...actualFilter, friendsOnly: parsed.friend === 'true'}
+        }
+
+        dispatch(requestUsers(pageSize, actualFilter.term, actualFilter.friendsOnly, actualPage))
+        dispatch(actions.setCurrentPage(actualPage))
+    }, [])
+
+    useEffect(() => {
+        navigate({
+            pathname: '/users',
+            search: `?term=${filter.term}&friend=${filter.friendsOnly}&page=${currentPage}`
+        })
+    }, [filter, currentPage])
+
+    const onPageChanged = (page: number) => {
+        dispatch(requestUsers(pageSize, filter.term, filter.friendsOnly, page))
+        dispatch(actions.setCurrentPage(page))
+    }
+
+    const onSearchHandler = (term: string, friend: boolean) => {
+        dispatch(requestUsers(pageSize, term, friend, 1))
+        if(!!parsed.page) {
+            dispatch(actions.setCurrentPage(+parsed.page))
+        } else {
+            dispatch(actions.setCurrentPage(1))
+        }
+
+    }
+
+    const followFunc = (userId: number) => {
+        dispatch(follow(userId))
+    }
+
+    const unfollowFunc = (userId: number) => {
+        dispatch(unfollow(userId))
+    }
+
     const usersArray = users.map(user => <User key={user.id} photoURL={user.photos}
                                                userId={user.id}
                                                followed={user.followed}
                                                name={user.name}
                                                status={user.status}
-                                               follow={props.follow}
-                                               unfollow={props.unfollow}
-                                               followingInProgress={props.followingInProgress}
+                                               follow={followFunc}
+                                               unfollow={unfollowFunc}
+                                               followingInProgress={followingInProgress}
 
     />)
 
     return (
         <div>
-            <UsersSearch />
+            <UsersSearch onSearchHandler={onSearchHandler}/>
             <Paginator
                 currentPage={currentPage}
                 onPageChanged={onPageChanged}
@@ -40,5 +101,3 @@ const Users: React.FC<UsersProps> = ({currentPage, totalUsersCount, pageSize, on
         </div>
     )
 }
-
-export default Users;

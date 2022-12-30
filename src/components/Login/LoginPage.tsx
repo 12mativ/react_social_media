@@ -1,13 +1,12 @@
 import React from "react";
-import {Formik, Form, FormikHelpers} from "formik";
+import {Form, Formik, FormikHelpers} from "formik";
 import loginFormSchema from "../FormValidation/LoginFormSchema";
 import {FormikControl} from "../Forms/FormikControl";
 import classes from "./Login.module.css";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../redux/auth/auth-reducer";
 import {Navigate} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
-import {compose} from "redux";
 
 type InitialValuesType = {
     email: string
@@ -27,20 +26,14 @@ const rememberMeOption = [
     {key: 'Remember me', value: 'true'}
 ]
 
-type MapStateProps = {
-    isAuth: boolean
-    captchaURL: string | null
-}
+export const LoginPage: React.FC = () => {
+    const captchaURL = useSelector((state: AppStateType) => state.auth.captchaURL)
+    const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
+    const dispatch = useDispatch()
 
-type MapDispatchProps = {
-    login: (email: string, password: string, rememberMe: string | null, captcha: string | null, setStatus: any) => void
-}
 
-type LoginType = MapStateProps & MapDispatchProps
-
-const Login: React.FC<LoginType> = ({login, isAuth, captchaURL}) => {
     const onSubmit = (values: InitialValuesType, action: FormikHelpers<InitialValuesType>) => {
-        login(values.email, values.password, values.rememberMe[0], values.captcha, action.setStatus)
+        dispatch(login(values.email, values.password, values.rememberMe[0], values.captcha, action.setStatus))
         action.setSubmitting(false)
         action.resetForm()
     }
@@ -106,11 +99,4 @@ const Login: React.FC<LoginType> = ({login, isAuth, captchaURL}) => {
             </Formik>
         </div>
     )
-};
-
-const mapStateToProps = (state: AppStateType): MapStateProps => ({
-    isAuth: state.auth.isAuth,
-    captchaURL: state.auth.captchaURL
-})
-
-export default compose(connect<MapStateProps, MapDispatchProps, null, AppStateType>(mapStateToProps, {login}))(Login)
+}

@@ -1,34 +1,30 @@
 import React from "react";
-import {Form, Formik, FormikHelpers} from "formik";
+import {Field, Form, Formik, FormikHelpers} from "formik";
 import classes from "../Login/Login.module.css";
 import {FormikControl} from "../Forms/FormikControl";
 import usersSearchFormSchema from "../FormValidation/UsersSearchFormSchema";
+import {useSelector} from "react-redux";
+import {getUsersFilter} from "../../redux/users/users-selectors";
 
 type InitialValuesType = {
     searchName: string
-    friendsOnly: Array<string | null>
+    friendsOnly: boolean
 }
 
-const initialValues: InitialValuesType = {
-    searchName: '',
-    friendsOnly: [],
+interface UsersSearchProps {
+    onSearchHandler: (term: string, friend: boolean) => void
 }
 
-const onSubmit = (values: InitialValuesType, action: FormikHelpers<InitialValuesType>) => {
-    //login(values.email, values.password, values.rememberMe[0], values.captcha, action.setStatus)
-    console.log(values)
-    action.setSubmitting(false)
-    action.resetForm()
-}
-
-const friendsOnlyOption = [
-    {key: 'Friends only', value: 'false'}
-]
-
-export const UsersSearch = () => {
+export const UsersSearch: React.FC<UsersSearchProps> = ({onSearchHandler}) => {
+    const filter = useSelector(getUsersFilter)
+    const onSubmit = (values: InitialValuesType, action: FormikHelpers<InitialValuesType>) => {
+        onSearchHandler(values.searchName, values.friendsOnly)
+        action.setSubmitting(false)
+    }
     return (
       <Formik
-        initialValues={initialValues}
+        enableReinitialize={true}
+        initialValues={{searchName: filter.term, friendsOnly: filter.friendsOnly} as InitialValuesType}
         onSubmit={onSubmit}
         validationSchema={usersSearchFormSchema}
       >
@@ -48,11 +44,8 @@ export const UsersSearch = () => {
                             />
                         </div>
                         <div>
-                            <FormikControl
-                              control='checkbox'
-                              name='friendsOnly'
-                              options={friendsOnlyOption}
-                            />
+                            <Field type="checkbox" name='friendsOnly' />
+                            <label htmlFor="friendsOnly">Friends only</label>
                         </div>
 
                         <button type="submit" disabled={!formik.isValid}>Find</button>

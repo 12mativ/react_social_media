@@ -15,12 +15,12 @@ export const CheckboxGroup = (props) => {
                                 <React.Fragment key={option.key}>
                                     <input 
                                         type='checkbox' 
-                                        id={option.value} 
+                                        id={option.value.toString()}
                                         {...field} 
-                                        value={option.value} 
-                                        checked={Boolean(field.value.includes(option.value))} 
+                                        value={option.value}
+                                        checked={Boolean(field.value.includes(option.value.toString()))}
                                     />
-                                    <label htmlFor={option.value}>{option.key}</label>
+                                    <label htmlFor={option.value.toString()}>{option.key}</label>
                                 </React.Fragment>
                             )
                         })
