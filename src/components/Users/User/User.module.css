@@ -4,6 +4,10 @@
     margin-bottom: 30px;
 }
 
+.user img {
+    width: 10em;
+}
+
 .user button {
     width: 100%;
     background-color: #5e5757;

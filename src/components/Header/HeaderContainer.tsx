@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header";
+import {Header} from "./Header";
 import {connect} from "react-redux";
 import {logout} from "../../redux/auth/auth-reducer";
 import {AppStateType} from "../../redux/redux-store";
@@ -19,7 +19,7 @@ type HeaderContainerType = MapStateProps & MapDispatchProps
 class HeaderContainer extends React.Component<HeaderContainerType> {
     render() {
         return (
-            <Header isAuth={this.props.isAuth} login={this.props.login} logout={this.props.logout} />
+            <Header />
         );
     }
 }

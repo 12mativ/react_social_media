@@ -12,7 +12,7 @@ import {
     getUsersFilter
 } from "../../redux/users/users-selectors";
 import {actions, follow, requestUsers, unfollow} from "../../redux/users/users-reducer";
-import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import {BooleanParam, NumberParam, StringParam, useQueryParams,} from 'use-query-params';
 
 export const Users = () => {
     const users = useSelector(getUsers)
@@ -23,24 +23,31 @@ export const Users = () => {
     const filter = useSelector(getUsersFilter)
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const location = useLocation()
-    const [searchParams] = useSearchParams(location.search)
-    const parsed = Object.fromEntries(searchParams)
+    // const navigate = useNavigate()
+    // const location = useLocation()
+    // const [searchParams] = useSearchParams(location.search)
+    // const parsed = Object.fromEntries(searchParams)
+
+    const [query, setQuery] = useQueryParams({
+        term: StringParam,
+        friend: BooleanParam,
+        page: NumberParam
+    });
+    const { term, friend, page } = query;
 
     useEffect(() => {
         let actualPage = currentPage
         let actualFilter = filter
-        if (!!parsed.page) {
-            actualPage = Number(parsed.page)
+        if (page) {
+            actualPage = Number(page)
         }
 
-        if (!!parsed.term) {
-            actualFilter = {...actualFilter, term: parsed.term}
+        if (term) {
+            actualFilter = {...actualFilter, term: term}
         }
 
-        if (!!parsed.friend) {
-            actualFilter = {...actualFilter, friendsOnly: parsed.friend === 'true'}
+        if (friend) {
+            actualFilter = {...actualFilter, friendsOnly: String(friend) === 'true'}
         }
 
         dispatch(requestUsers(pageSize, actualFilter.term, actualFilter.friendsOnly, actualPage))
@@ -48,10 +55,13 @@ export const Users = () => {
     }, [])
 
     useEffect(() => {
-        navigate({
+        setQuery({term: filter.term !== '' ? filter.term : undefined,
+            friend: filter.friendsOnly ? filter.friendsOnly : undefined,
+            page: currentPage !== 1 ? currentPage : undefined})
+        /*navigate({
             pathname: '/users',
             search: `?term=${filter.term}&friend=${filter.friendsOnly}&page=${currentPage}`
-        })
+        })*/
     }, [filter, currentPage])
 
     const onPageChanged = (page: number) => {
@@ -61,12 +71,11 @@ export const Users = () => {
 
     const onSearchHandler = (term: string, friend: boolean) => {
         dispatch(requestUsers(pageSize, term, friend, 1))
-        if(!!parsed.page) {
-            dispatch(actions.setCurrentPage(+parsed.page))
+        if(page) {
+            dispatch(actions.setCurrentPage(+page))
         } else {
             dispatch(actions.setCurrentPage(1))
         }
-
     }
 
     const followFunc = (userId: number) => {
